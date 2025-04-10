@@ -8,7 +8,7 @@ function delay(ms: number) {
 }
 
 export async function POST(req: NextRequest, {params}: RouteRequestParams) {
-  const {queue_name} = params;
+  const {queue_name} = await params;
   const message = await req.json();
 
   enqueue(queue_name, message)
@@ -19,7 +19,7 @@ export async function POST(req: NextRequest, {params}: RouteRequestParams) {
 }
 
 export async function GET(req: NextRequest, {params}: RouteRequestParams) {
-  const {queue_name} = params;
+  const {queue_name} = await params;
   const timeoutParam = req.nextUrl.searchParams.get('timeout');
 
   const timeout = Math.max(0, parseInt(timeoutParam || '10000'));

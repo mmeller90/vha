@@ -12,7 +12,9 @@ const Card = (props: Props) => {
       <div>{props.name}</div>
       <div>{props.value}</div>
     </div>
-    <div className={styles.button} onClick={() => props.clicked}>GO</div>
+    <div className={styles.button} onClick={() => {
+      props.clicked();
+    }}>GO</div>
   </div>);
 }
 
