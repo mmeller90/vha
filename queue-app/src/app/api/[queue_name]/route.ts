@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse} from "next/server";
-
-const queues: Record<string, any[]> = {};
+import {dequeue, enqueue} from "../../../queue/queue"
 
 type RouteRequestParams = {params: {queue_name: string}};
 
@@ -12,11 +11,7 @@ export async function POST(req: NextRequest, {params}: RouteRequestParams) {
   const {queue_name} = params;
   const message = await req.json();
 
-  if (!queues[queue_name]) {
-    queues[queue_name] = [];
-  }
-
-  queues[queue_name].push(message);
+  enqueue(queue_name, message)
 
   return NextResponse.json({
     status: 200
@@ -32,14 +27,13 @@ export async function GET(req: NextRequest, {params}: RouteRequestParams) {
   const start = Date.now()
 
   while ((Date.now() - start) < timeout) {
-    const queue = queues[queue_name] || []
+    const message = dequeue(queue_name);
 
-    if (queue.length > 0) {
-      const message = queue.shift()
-      return NextResponse.json({ message })
+    if (message !== undefined) {
+      return NextResponse.json({ message });
     }
 
-    await delay(100)
+    await delay(100);
   }
 
   return new NextResponse(null, { status: 204 })
