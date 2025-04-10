@@ -1,14 +1,18 @@
 interface Props {
   name: string;
   value: number;
+  clicked: () => void;
 }
 
 import styles from "./Card.module.css"
 
 const Card = (props: Props) => {
   return (<div className={styles.card}>
-    <div>{props.name}</div>
-    <div>{props.value}</div>
+    <div className={styles.content}>
+      <div>{props.name}</div>
+      <div>{props.value}</div>
+    </div>
+    <div className={styles.button} onClick={() => props.clicked}>GO</div>
   </div>);
 }
 
