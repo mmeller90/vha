@@ -33,3 +33,13 @@
   padding: 2rem;
   justify-content: center;
 }
+
+.header {
+  background-color: #FF006D;
+  height: 3.125rem;
+  text-align: center;
+  line-height: 3.125rem;
+  vertical-align: middle;
+  color: white;
+  font-size: 12.6588px
+}

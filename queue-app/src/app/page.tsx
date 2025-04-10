@@ -39,15 +39,20 @@ const Home = () => {
 
 
 
-  return (<div className={styles.cards}>
-    {queues.map(queue => (
-      <Card 
-        key={queue.name} 
-        name={queue.name} 
-        value={queue.size} 
-        clicked={() => {getQueueValue(queue.name)}}
-      />
-    ))}</div>);
+  return (
+    <div>
+      <div className={styles.header}><span>Voyantis Home Assigment - Mateusz Meller</span></div>
+      <div className={styles.cards}>
+        {queues.map(queue => (
+          <Card 
+            key={queue.name} 
+            name={queue.name} 
+            value={queue.size} 
+            clicked={() => {getQueueValue(queue.name)}}
+          />
+        ))}
+      </div>
+    </div>);
 }
 
 export default Home;
