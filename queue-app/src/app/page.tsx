@@ -1,5 +1,7 @@
 "use client"
 import {useEffect, useState} from 'react';
+import Card from './_components/Card';
+import styles from "./page.module.css"
 
 const Home = () => {
   const [queues, setQueues] = useState([]);
@@ -22,7 +24,10 @@ const Home = () => {
 
 
 
-  return <div>{queues.map(queue => (<div key={queue.name}>{queue.name}</div>))}</div>
+  return (<div className={styles.cards}>
+    {queues.map(queue => (
+      <Card key={queue.name} name={queue.name} value={queue.size}/>
+    ))}</div>);
 }
 
 export default Home;
